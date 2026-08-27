@@ -418,27 +418,30 @@ function mostrarDetalle(pelicula) {
 	  <div class="poster-box">
 		 <img src="${pelicula.image}" alt="${pelicula.name}" class="poster-detalle">
 	  </div>
+
 	  <div class="info-box">
-		<p><strong>Año de Estreno:</strong> ${pelicula.anioEstreno}</p>
-		<p><strong>Se estrenó hace:</strong> ${estrenoHace} años</p>
-		<p><strong>País de Estreno:</strong> ${pelicula.paisestreno}</p>
-		<p><strong>Duración:</strong> ${pelicula.duracion}</p>
-		<p><strong>Género:</strong> ${pelicula.genero}</p>
-		<p><strong>Dirección:</strong> ${pelicula.direccion}</p>
-		<p><strong>Guionistas:</strong> ${pelicula.guion}</p>
-		${pelicula.adaptacionbasadoen ? `<p><strong>Basado en una adaptación:</strong> ${pelicula.adaptacionbasadoen}</p>` : ""}
-		<p><strong>Producción:</strong> ${pelicula.produccion}</p>
-		<p><strong>Calificación:</strong> ${promedio}</p>
+      <p><strong>Año de Estreno:</strong> ${pelicula.anioEstreno}</p>
+      <p><strong>Se estrenó hace:</strong> ${estrenoHace} años</p>
+      <p><strong>País de Estreno:</strong> ${pelicula.paisestreno}</p>
+      <p><strong>Duración:</strong> ${pelicula.duracion}</p>
+      <p><strong>Género:</strong> ${pelicula.genero}</p>
+      <p><strong>Dirección:</strong> ${pelicula.direccion}</p>
+      <p><strong>Guionistas:</strong> ${pelicula.guion}</p>
+      ${pelicula.adaptacionbasadoen ? `<p><strong>Basado en una adaptación:</strong> ${pelicula.adaptacionbasadoen}</p>` : ""}
+      <p><strong>Producción:</strong> ${pelicula.produccion}</p>
+		  <p><strong>Calificación:</strong> ${promedio}</p>
 	  </div>
+
+    <div class="trailer-box">
+       ${htmlForTrailerVideo } 	
+	  </div>
+
 	</div>
     <div class="volver">
       <button onclick="history.back()">Volver</button>
     </div>
 	<!-- texto  eRNpNxy84Ik mqqft2x_Aa4 
 	-->
-	<div>
-       ${htmlForTrailerVideo } 	
-	</div>
 	<!-- 
 		<div>
 		  <a href="https://www.youtube.com/watch?v="${pelicula.trailerVideo} target="_blank">
