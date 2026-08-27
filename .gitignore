@@ -1,0 +1,24 @@
+# Copias de respaldo del proyecto
+/Respaldo/
+
+# Configuracion local de VS Code
+.vscode/
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs y archivos temporales
+*.log
+*.tmp
+
+# Dependencias, por si el proyecto incorpora herramientas Node.js
+node_modules/
+
+# Ignore git bundle backup files but keep other files (e.g., README.md)
+# Top-level bundles
+/backups/*.bundle
+
+# Bundles in subfolders (if any)
+!/backups/             # ensure folder itself is not ignored (optional clarity)
+**/backups/**/*.bundle
