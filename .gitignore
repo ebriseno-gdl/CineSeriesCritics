@@ -2,7 +2,9 @@
 /Respaldo/
 
 # Configuracion local de VS Code
-.vscode/
+!.vscode/
+.vscode/*
+!.vscode/launch.json
 
 # Archivos generados por el sistema operativo
 .DS_Store
