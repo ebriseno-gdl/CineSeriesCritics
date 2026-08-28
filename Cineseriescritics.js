@@ -429,17 +429,30 @@ function mostrarDetalle(pelicula) {
       <p><strong>Guionistas:</strong> ${pelicula.guion}</p>
       ${pelicula.adaptacionbasadoen ? `<p><strong>Basado en una adaptación:</strong> ${pelicula.adaptacionbasadoen}</p>` : ""}
       <p><strong>Producción:</strong> ${pelicula.produccion}</p>
-		  <p><strong>Calificación:</strong> ${promedio}</p>
 	  </div>
 
-    <div class="trailer-box">
-       ${htmlForTrailerVideo } 	
-	  </div>
+    <div class="trailer-section">
+      <div class="ratings-section">
+        <div class="average-rating">
+          <h3>Calificación Promedio</h3>
+          <p class="rating-value">${promedio}</p>
+          <button class="btn-view-ratings" onclick="mostrarCalificacionesPorCategoria('${pelicula.name}')">Ver calificaciones por categoría</button>
+        </div>
+        <div class="user-ratings">
+          <h3>Promedio de Usuarios</h3>
+          <p class="rating-value">Próximamente</p>
+          <p class="rating-note">(Datos de la base de datos)</p>
+        </div>
+      </div>
+      <div class="trailer-box">
+        ${htmlForTrailerVideo } 	
+      </div>
+    </div>
 
 	</div>
-    <div class="volver">
-      <button onclick="history.back()">Volver</button>
-    </div>
+  <div class="volver">
+    <button onclick="history.back()">Volver</button>
+  </div>
 	<!-- texto  eRNpNxy84Ik mqqft2x_Aa4 
 	-->
 	<!-- 
@@ -493,6 +506,66 @@ function calcularPromedio(calificaciones) {
 	
 	return promedio;
 };
+
+// Mostrar calificaciones por categoría
+function mostrarCalificacionesPorCategoria(nombrePelicula) {
+    const pelicula = peliculas.find(p => p.name === nombrePelicula);
+    if (!pelicula) {
+        console.log("Película no encontrada");
+        return;
+    }
+    if (!pelicula.calificaciones || pelicula.calificaciones.length === 0) {
+        console.log("No hay calificaciones disponibles para esta película: " + pelicula.name);
+        return;
+    } 
+
+    const modalHTML = `
+        <div class="modal-overlay" onclick="cerrarModalCalificaciones()" id="modalOverlay">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <div class="modal-header">
+                    <h2>Calificaciones por Categoría - ${pelicula.name}</h2>
+                    <button class="modal-close" onclick="cerrarModalCalificaciones()">✕</button>
+                </div>
+                <div class="modal-body">
+                    <table class="ratings-table">
+                        <thead>
+                            <tr>
+                                <th>Categoría</th>
+                                <th>Calificación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${pelicula.calificaciones.map(c => `
+                                <tr>
+                                    <td>${c.categoria}</td>
+                                    <td><span class="rating-badge">${c.calificacion}</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-close-modal" onclick="cerrarModalCalificaciones()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const existingModal = document.getElementById('modalOverlay');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+// Cerrar modal de calificaciones
+function cerrarModalCalificaciones() {
+    const modal = document.getElementById('modalOverlay');
+    if (modal) {
+        modal.remove();
+    }
+}
 
 // Inicializar
 renderLista();
