@@ -44,7 +44,26 @@ const peliculas = [
 	trailerVideo: "vt_lEZM2ZmQ",
     calificaciones: [
         {categoria: "Fotografia", calificacion: 100}
-    ]
+    ],
+    critica: {
+        puntosPositivos: [
+            "La actuación de las protagonistas es destacable",
+            "La película tiene buenos momentos de comedia",
+            "La historia resulta entretenida"
+        ],
+
+        puntosNegativos: [
+            "Algunas situaciones son predecibles",
+            "La duración puede resultar excesiva"
+        ],
+
+        puntosNeutrales: [
+            "La película combina comedia y drama",
+            "La música acompaña correctamente las escenas"
+        ],
+
+        conclusion: "En general, es una película ligera y agradable."
+    }
    },
   { id: 3, 
     name: "SPIDERMAN UN NUEVO UNIVERSO", 
@@ -206,7 +225,7 @@ const peliculas = [
         {categoria: "Produccion", calificacion: 20}
     ]
    },
-{ id: 11, 
+  { id: 11, 
     name: "TOY STORY VACACIONES EN HAWAII", 
 	anioEstreno: 2011, 
 	image: "images/ToyStoryVacacionesEnHawaii.jpg",
@@ -407,6 +426,10 @@ function mostrarDetalle(pelicula) {
   const anioActual = new Date().getFullYear();
   const estrenoHace = anioActual - pelicula.anioEstreno;
   const promedio = calcularPromedio(pelicula.calificaciones);
+  const critica = pelicula.critica || {};
+  const puntosPositivos = critica.puntosPositivos || [];
+  const puntosNegativos = critica.puntosNegativos || [];
+  const puntosNeutrales = critica.puntosNeutrales || [];
   console.log("nombre pelicula: " + pelicula.name);
   console.log("trailer id: " + pelicula.trailerVideo);
   let htmlForTrailerVideo = "<a href=\"https://www.youtube.com/watch?v=" + pelicula.trailerVideo + "\" target=\"_blank\"><img src=\"https://img.youtube.com/vi/" + pelicula.trailerVideo + "/hqdefault.jpg\" alt=\"Trailer " + pelicula.name + "\"></a>";
@@ -434,12 +457,12 @@ function mostrarDetalle(pelicula) {
     <div class="trailer-section">
       <div class="ratings-section">
         <div class="average-rating">
-          <h3>Calificación Promedio</h3>
-          <p class="rating-value">${promedio}</p>
-          <button class="btn-view-ratings" onclick="mostrarCalificacionesPorCategoria('${pelicula.name}')">Ver calificaciones por categoría</button>
+          <h3>Calificación CineSeriesCritics</h3>
+          <p class="rating-value ${promedio >= 60 ? 'rating-passed' : 'rating-failed'}">${promedio}</p>
+          <button class="btn-view-ratings" onclick="mostrarCalificacionesPorCategoria('${pelicula.name}')">Calificaciones por Categoría</button>
         </div>
         <div class="user-ratings">
-          <h3>Promedio de Usuarios</h3>
+          <h3>Calificación  Usuarios</h3>
           <p class="rating-value">Próximamente</p>
           <p class="rating-note">(Datos de la base de datos)</p>
         </div>
@@ -450,6 +473,51 @@ function mostrarDetalle(pelicula) {
     </div>
 
 	</div>
+
+<section class="critica" style="border: 2px solid #000; padding: 20px; margin-top: 25px;">
+  <h2>Critica</h2>
+
+  <section style="background-color: #dbeafe; padding: 12px; margin: 10px 0;">
+    <h3 style="color: blue;">Puntos Positivos</h3>
+    <ul style="color: blue;">
+        ${
+            puntosPositivos.length
+            ? puntosPositivos.map(punto => `<li>${punto}</li>`).join("")
+            : "<li>No disponible</li>"
+        }
+    </ul>
+  </section>
+
+  <section style="background-color: #fee2e2; padding: 12px; margin: 10px 0;">
+    <h3 style="color: red;">Puntos Negativos</h3>
+    <ul style="color: red;">
+        ${
+            puntosNegativos.length
+            ? puntosNegativos.map(punto => `<li>${punto}</li>`).join("")
+            : "<li>No disponible</li>"
+        }
+    </ul>
+  </section>
+
+  <section style="background-color: #dcfce7; padding: 12px; margin: 10px 0;">
+    <h3 style="color: green;">Puntos Neutrales</h3>
+    <ul style="color: green;">
+        ${
+            puntosNeutrales.length
+            ? puntosNeutrales.map(punto => `<li>${punto}</li>`).join("")
+            : "<li>No disponible</li>"
+        }
+    </ul>
+  </section>
+
+  <section style="background-color: #f3f4f6; padding: 12px; margin: 10px 0;">
+    <h3 style="color: black;">Conclusion</h3>
+    <p style="color: black;">
+      ${critica.conclusion || "No disponible"}
+    </p>
+  </section>
+</section>
+
   <div class="volver">
     <button onclick="history.back()">Volver</button>
   </div>

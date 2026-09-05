@@ -115,6 +115,14 @@ body {
   margin: 8px 0;
 }
 
+#detallePelicula .rating-value.rating-passed {
+    color: #0078d7 !important;  /* Azul - Mayor especificidad */
+}
+
+#detallePelicula .rating-value.rating-failed {
+    color: #ff0000 !important;  /* Rojo - Mayor especificidad */
+}
+
 /* Botón volver */
 .volver {
   text-align: center;
@@ -177,7 +185,7 @@ body {
 .average-rating {
     flex: 1;
     background-color: #f9f9f9;
-    padding: 20px;
+    padding: 15px 10px;     /* Reducir padding */
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -185,25 +193,41 @@ body {
     justify-content: center;
     text-align: center;
     border: 2px solid #0078d7;
+    max-height: 180px;      /* Limitar altura */
 }
 
 .average-rating h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.1em;
+    margin: 0 0 5px 0;          /* Reducir margen */
+    font-size: 0.95em;          /* Más pequeño */
     color: #333;
 }
 
 .average-rating .rating-value {
     font-size: 2em;
     font-weight: bold;
-    color: #0078d7;
+    color: inherit;  /* ← Cambiar a inherit */
     margin: 10px 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.average-rating .rating-value.rating-passed {  /* ← Más específico */
+    color: #0078d7 !important;  /* Azul */
+}
+
+.average-rating .rating-value.rating-failed {  /* ← Más específico */
+    color: #ff0000 !important;  /* Rojo */
 }
 
 .user-ratings {
     flex: 1;
     background-color: #f9f9f9;
-    padding: 20px;
+    padding: 15px 10px;     /* Reducir padding */
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -211,19 +235,35 @@ body {
     justify-content: center;
     text-align: center;
     border: 2px solid #ccc;
+    max-height: 180px;      /* Limitar altura */
 }
 
 .user-ratings h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.1em;
+    margin: 0 0 5px 0;          /* Reducir margen */
+    font-size: 0.95em;          /* Más pequeño */
     color: #333;
 }
 
 .user-ratings .rating-value {
     font-size: 2em;
     font-weight: bold;
-    color: #999;
+    color: inherit;  /* ← Cambiar a inherit */
     margin: 10px 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-ratings .rating-value.rating-passed {  /* ← Más específico */
+    color: #0078d7 !important;  /* Azul */
+}
+
+.user-ratings .rating-value.rating-failed {  /* ← Más específico */
+    color: #ff0000 !important;  /* Rojo */
 }
 
 .user-ratings .rating-note {
@@ -237,10 +277,10 @@ body {
     background-color: #0078d7;
     color: #fff;
     border: none;
-    padding: 10px 15px;
+    padding: 5px 10px;          /* Más pequeño */
     border-radius: 6px;
     cursor: pointer;
-    font-size: 0.95em;
+    font-size: 0.8em;           /* Más pequeño */
     transition: background-color 0.2s ease;
     margin-top: 10px;
 }
@@ -313,7 +353,7 @@ body {
 }
 
 .modal-header {
-    padding: 20px;
+    padding: 12px 15px;   /* Reducir padding */
     border-bottom: 2px solid #0078d7;
     display: flex;
     justify-content: space-between;
@@ -322,7 +362,7 @@ body {
 
 .modal-header h2 {
     margin: 0;
-    font-size: 1.5em;
+    font-size: 1.2em;     /* Reducir tamaño de título */
     color: #333;
     flex: 1;
 }
@@ -341,14 +381,16 @@ body {
 }
 
 .modal-body {
-    padding: 20px;
+    padding: 12px 15px;   /* Reducir padding */
     flex: 1;
     overflow-y: auto;
+    font-size: 0.95em;    /* Reducir tamaño de letra general */
 }
 
 .ratings-table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.9em;     /* Reducir tamaño de letra de tabla */
 }
 
 .ratings-table thead {
@@ -356,16 +398,18 @@ body {
 }
 
 .ratings-table th {
-    padding: 12px;
+    padding: 5px 12px;    /* Reducir padding vertical */
     text-align: left;
     font-weight: bold;
     border-bottom: 2px solid #ddd;
     color: #333;
+    font-size: 0.95em;    /* Reducir tamaño de letra */
 }
 
 .ratings-table td {
-    padding: 12px;
+    padding: 5px 12px;   /* Reducir padding vertical */
     border-bottom: 1px solid #ddd;
+    font-size: 0.9em;    /* Reducir tamaño de letra */
 }
 
 .ratings-table tbody tr:hover {
@@ -374,17 +418,26 @@ body {
 
 .rating-badge {
     display: inline-block;
-    background-color: #0078d7;
-    color: #fff;
-    padding: 5px 12px;
-    border-radius: 20px;
+    background-color: transparent;  /* Quitar fondo azul */
+    color: #0078d7;                 /* Color azul por defecto */
+    padding: 2px 5px;               /* Reducir padding */
+    border-radius: 0px;             /* Sin bordes redondeados */
     font-weight: bold;
-    min-width: 45px;
+    min-width: auto;                /* Sin ancho mínimo */
     text-align: center;
+    font-size: 0.95em;              /* Reducir tamaño de letra */
+}
+
+.rating-badge.passed {
+    color: #0078d7;  /* Azul para >= 60 */
+}
+
+.rating-badge.failed {
+    color: #ff0000;  /* Rojo para < 60 */
 }
 
 .modal-footer {
-    padding: 20px;
+    padding: 10px 15px;   /* Reducir padding */
     border-top: 2px solid #eee;
     text-align: right;
 }
@@ -418,7 +471,11 @@ body {
   }
 
   .ratings-section {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    height: auto;
+    max-height: 200px;  /* Reducir altura */
   }
 }
 
