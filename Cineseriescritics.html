@@ -8,16 +8,40 @@
 </head>
 <body>
   <div id="logo">
-      <img src="Cineseriescritics.png" 
-           alt="Logotipo Cineseriescritics">
+      <img src="Cineseriescritics.png" alt="Logotipo Cineseriescritics">
   </div>
   
-  <div id="contenedorPeliculas" class="grid-peliculas">
-	  <!-- Aqui se insertaran dinamicamente las tarjetas de las peliculas-->
-	</div>
-   <div id="detallePelicula" style="display:none;">
-	  <!-- Aqui se insertara dinamicamente el detalle de la pelicula seleccionada-->
-   </div>
+  <div class="layout-principal">
+    <!-- SIDEBAR IZQUIERDO -->
+    <aside id="sidebarIzquierda">
+      <h3>Filtros</h3>
+      <ul>
+        <li>Acción</li>
+        <li>Drama</li>
+        <li>Comedia</li>
+      </ul>
+    </aside>
+
+    <!-- CONTENIDO CENTRAL (catálogo o detalle) -->
+    <main class="contenido-principal">
+      <div id="contenedorPeliculas" class="grid-peliculas">
+        <!-- Tarjetas de películas -->
+      </div>
+      
+      <div id="detallePelicula" style="display:none;">
+        <!-- Detalle de la película -->
+      </div>
+    </main>
+
+    <!-- SIDEBAR DERECHO -->
+    <aside id="sidebarDerecha">
+      <h3>Populares</h3>
+      <ul>
+        <li>película 1</li>
+        <li>película 2</li>
+      </ul>
+    </aside>
+  </div>
 
   <script src="Cineseriescritics.js"></script>
 </body>

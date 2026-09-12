@@ -422,6 +422,13 @@ function renderLista() {
 function mostrarDetalle(pelicula) {
   document.title = pelicula.name;
   document.getElementById("contenedorPeliculas").style.display = "none";
+
+  /*
+  // AGREGAR ESTAS 2 LÍNEAS:
+  document.getElementById("sidebarIzquierda").style.display = "none";
+  document.getElementById("sidebarDerecha").style.display = "none";
+  */
+
   const detalle = document.getElementById("detallePelicula");
   const anioActual = new Date().getFullYear();
   const estrenoHace = anioActual - pelicula.anioEstreno;
@@ -549,6 +556,11 @@ function mostrarLista() {
   document.title = "Cineseriescritics";
   document.getElementById("detallePelicula").style.display = "none";
   document.getElementById("contenedorPeliculas").style.display = "grid";
+
+  // AGREGAR ESTAS 2 LÍNEAS:
+  document.getElementById("sidebarIzquierda").style.display = "block";
+  document.getElementById("sidebarDerecha").style.display = "block"; 
+
 }
 
 // Manejo de historial
