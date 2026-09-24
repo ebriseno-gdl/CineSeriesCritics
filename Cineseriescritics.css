@@ -72,7 +72,7 @@ body {
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   padding: 12px;
   text-align: center;
-  translation: transform 0.2s;
+  transition: transform 0.2s;
 }
 		
 .card:hover {
@@ -107,16 +107,6 @@ body {
 .card p.reprobada { color: red; }
 
 /* Vista detalle de película */
-#detallePelicula {
-  margin-top: 0; /* Ahora el margen lo maneja .layout-principal */
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  padding: 20px;
-  max-width: none; /* Sin límite porque el grid lo controla */
-}
-
 #detallePelicula {
   margin-top: 0; /* El espacio debajo del logo lo maneja .layout-principal */
   margin: 0 auto;
@@ -183,11 +173,20 @@ body {
   background-color: #005a9e;
 }
 
-.detalle-container {
-	display: flex;          /* coloca portada e info en fila */
-	gap: 20px;              /* espacio entre portada y datos */
-	align-items: stretch;   /* ambos se estiran a la misma altura */
-	margin-top: 40px;
+.detail-grid-container {
+  display: grid;
+  grid-template-columns:
+    minmax(220px, 1fr)
+    minmax(280px, 1.2fr)
+    minmax(300px, 1.3fr);
+  gap: 20px;
+  margin-top: 20px;
+  align-items: start;
+}
+
+.detail-title,
+.detail-critica {
+  grid-column: 1 / -1;
 }
 
 .poster-box {
@@ -206,19 +205,18 @@ body {
     line-height: 1.4;
 }
 
-.trailer-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    min-width: 280px;
+.detail-side {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 0;
 }
 
 .ratings-section {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-    height: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  height: auto;
 }
 
 .average-rating {
@@ -496,16 +494,38 @@ body {
     background-color: #005a9e;
 }
 
+@media (max-width: 600px) {
+  .ratings-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .detail-grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .detail-side {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .detail-grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-title,
+  .detail-poster,
+  .detail-info,
+  .detail-side,
+  .detail-critica {
+    grid-column: 1;
+  }
+}
+
 @media (max-width: 900px) {
-  .detalle-container {
-    flex-direction: column;
-  }
-
   .poster-box {
-    min-width: 0;
-  }
-
-  .trailer-section {
     min-width: 0;
   }
 
@@ -542,4 +562,3 @@ body {
     margin-top: 20px;
   }
 }
-

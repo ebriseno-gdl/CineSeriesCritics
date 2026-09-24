@@ -347,7 +347,7 @@ const peliculas = [
    },
    { id: 15, 
     name: "TOY STORY LAMP LIFE", 
-	anioEstreno: 2012, 
+	anioEstreno: 2020, 
 	image: "images/ToyStoryLampLife.jpg",
 	paisestreno: "Estados Unidos",
     duracion: "7min",
@@ -375,6 +375,31 @@ const peliculas = [
 		{categoria: "Produccion", calificacion: 80}
 	]
    },
+   { id: 16, 
+    name: "CUESTION DE TIEMPO", 
+	anioEstreno: 2013, 
+	image: "images/CuestionDeTiempo.jpg",
+	paisestreno: "Estados Unidos",
+    duracion: "123min",
+    genero: "Comedia",
+    direccion: "Richard Curtis",
+    guion: "Richard Curtis",
+    produccion: "Tim Bevan, Eric Feliner, Nicky Kentish Barnes",
+    trailerVideo: "5DQAZtFHLEA",	
+    calificaciones: [
+        {categoria: "Fotografia", calificacion: 96},
+        {categoria: "Montaje", calificacion: 60},
+        {categoria: "Imaginacion", calificacion: 49},
+        {categoria: "Actuaciones", calificacion: 80},
+        {categoria: "Personajes", calificacion: 75},
+        {categoria: "Argumento", calificacion: 62},
+        {categoria: "Guion", calificacion: 58},
+        {categoria: "Direccion", calificacion: 70},
+        {categoria: "Produccion", calificacion: 60},
+        {categoria: "Vestuario", calificacion: 60},
+        {categoria: "Escenografia", calificacion: 80}
+	]
+   }
 ];
 
 // Renderizar lista
@@ -404,7 +429,8 @@ function renderLista() {
     calif.textContent = "Calificacion: " + promedio;
     calif.className = promedio >= 60 ? "aprobada" : "reprobada"
 
-    tarjeta.onclick = () => {
+    tarjeta.onclick = () => 
+    {
       mostrarDetalle(p);
       history.pushState({page:"detalle", id:p.id}, "Detalle - " + p.name, "?detalle="+p.id);
     };
@@ -419,7 +445,8 @@ function renderLista() {
 }
 
 // Mostrar detalle
-function mostrarDetalle(pelicula) {
+function mostrarDetalle(pelicula) 
+{
   document.title = pelicula.name;
   document.getElementById("contenedorPeliculas").style.display = "none";
 
@@ -443,87 +470,93 @@ function mostrarDetalle(pelicula) {
   console.log("htmlForTrailerVideo : " + htmlForTrailerVideo);
   detalle.style.display = "block";
   detalle.innerHTML = `
-    <h1>${pelicula.name}</h1>
-	<div class="detalle-container">
-	  <div class="poster-box">
-		 <img src="${pelicula.image}" alt="${pelicula.name}" class="poster-detalle">
+    <h1 class="detail-title">${pelicula.name}</h1>
+    <div class="detail-grid-container">
+
+      <!-- Portada -->
+	  <div class="poster-box detail-poster">
+        <img src="${pelicula.image}" alt="${pelicula.name}" class="poster-detalle">
+      </div>
+
+      <!-- Datos de la Película -->
+	  <div class="info-box detail-info">
+        <p><strong>Año de Estreno:</strong> ${pelicula.anioEstreno}</p>
+        <p><strong>Se estrenó hace:</strong> ${estrenoHace} años</p>
+        <p><strong>País de Estreno:</strong> ${pelicula.paisestreno}</p>
+        <p><strong>Duración:</strong> ${pelicula.duracion}</p>
+        <p><strong>Género:</strong> ${pelicula.genero}</p>
+        <p><strong>Dirección:</strong> ${pelicula.direccion}</p>
+        <p><strong>Guionistas:</strong> ${pelicula.guion}</p>
+        ${pelicula.adaptacionbasadoen ? `<p><strong>Basado en una adaptación:</strong> ${pelicula.adaptacionbasadoen}</p>` : ""}
+        <p><strong>Producción:</strong> ${pelicula.produccion}</p>
 	  </div>
 
-	  <div class="info-box">
-      <p><strong>Año de Estreno:</strong> ${pelicula.anioEstreno}</p>
-      <p><strong>Se estrenó hace:</strong> ${estrenoHace} años</p>
-      <p><strong>País de Estreno:</strong> ${pelicula.paisestreno}</p>
-      <p><strong>Duración:</strong> ${pelicula.duracion}</p>
-      <p><strong>Género:</strong> ${pelicula.genero}</p>
-      <p><strong>Dirección:</strong> ${pelicula.direccion}</p>
-      <p><strong>Guionistas:</strong> ${pelicula.guion}</p>
-      ${pelicula.adaptacionbasadoen ? `<p><strong>Basado en una adaptación:</strong> ${pelicula.adaptacionbasadoen}</p>` : ""}
-      <p><strong>Producción:</strong> ${pelicula.produccion}</p>
-	  </div>
-
-    <div class="trailer-section">
-      <div class="ratings-section">
-        <div class="average-rating">
-          <h3>Calificación CineSeriesCritics</h3>
-          <p class="rating-value ${promedio >= 60 ? 'rating-passed' : 'rating-failed'}">${promedio}</p>
-          <button class="btn-view-ratings" onclick="mostrarCalificacionesPorCategoria('${pelicula.name}')">Calificaciones por Categoría</button>
+      <!-- Calificaciones y Trailer -->
+      <div class="detail-side">
+        <!-- Calificaciones -->
+        <div class="ratings-section">
+            <div class="average-rating">
+                <h3>Calificación CineSeriesCritics</h3>
+                <p class="rating-value ${promedio >= 60 ? 'rating-passed' : 'rating-failed'}">${promedio}</p>
+                <button class="btn-view-ratings" onclick="mostrarCalificacionesPorCategoria('${pelicula.name}')">Calificaciones por Categoría</button>
+            </div>
+            <div class="user-ratings">
+                <h3>Calificación  Usuarios</h3>
+                <p class="rating-value">Próximamente</p>
+                <p class="rating-note">(Datos de la base de datos)</p>
+            </div>
         </div>
-        <div class="user-ratings">
-          <h3>Calificación  Usuarios</h3>
-          <p class="rating-value">Próximamente</p>
-          <p class="rating-note">(Datos de la base de datos)</p>
+        <!-- Trailer -->
+        <div class="trailer-box">
+            ${htmlForTrailerVideo } 	
         </div>
       </div>
-      <div class="trailer-box">
-        ${htmlForTrailerVideo } 	
-      </div>
-    </div>
 
 	</div>
 
-<section class="critica" style="border: 2px solid #000; padding: 20px; margin-top: 25px;">
-  <h2>Critica</h2>
+    <section class="critica detail-critica">
+        <h2>Critica</h2>
 
-  <section style="background-color: #dbeafe; padding: 12px; margin: 10px 0;">
-    <h3 style="color: blue;">Puntos Positivos</h3>
-    <ul style="color: blue;">
-        ${
-            puntosPositivos.length
-            ? puntosPositivos.map(punto => `<li>${punto}</li>`).join("")
-            : "<li>No disponible</li>"
-        }
-    </ul>
-  </section>
+        <section style="background-color: #dbeafe; padding: 12px; margin: 10px 0;">
+            <h3 style="color: blue;">Puntos Positivos</h3>
+            <ul style="color: blue;">
+                ${
+                    puntosPositivos.length
+                    ? puntosPositivos.map(punto => `<li>${punto}</li>`).join("")
+                    : "<li>No disponible</li>"
+                }
+            </ul>
+        </section>
 
-  <section style="background-color: #fee2e2; padding: 12px; margin: 10px 0;">
-    <h3 style="color: red;">Puntos Negativos</h3>
-    <ul style="color: red;">
-        ${
-            puntosNegativos.length
-            ? puntosNegativos.map(punto => `<li>${punto}</li>`).join("")
-            : "<li>No disponible</li>"
-        }
-    </ul>
-  </section>
+        <section style="background-color: #fee2e2; padding: 12px; margin: 10px 0;">
+            <h3 style="color: red;">Puntos Negativos</h3>
+            <ul style="color: red;">
+                ${
+                    puntosNegativos.length
+                    ? puntosNegativos.map(punto => `<li>${punto}</li>`).join("")
+                    : "<li>No disponible</li>"
+                }
+            </ul>
+        </section>
 
-  <section style="background-color: #dcfce7; padding: 12px; margin: 10px 0;">
-    <h3 style="color: green;">Puntos Neutrales</h3>
-    <ul style="color: green;">
-        ${
-            puntosNeutrales.length
-            ? puntosNeutrales.map(punto => `<li>${punto}</li>`).join("")
-            : "<li>No disponible</li>"
-        }
-    </ul>
-  </section>
+        <section style="background-color: #dcfce7; padding: 12px; margin: 10px 0;">
+            <h3 style="color: green;">Puntos Neutrales</h3>
+            <ul style="color: green;">
+                ${
+                    puntosNeutrales.length
+                    ? puntosNeutrales.map(punto => `<li>${punto}</li>`).join("")
+                    : "<li>No disponible</li>"
+                }
+            </ul>
+        </section>
 
-  <section style="background-color: #f3f4f6; padding: 12px; margin: 10px 0;">
-    <h3 style="color: black;">Conclusion</h3>
-    <p style="color: black;">
-      ${critica.conclusion || "No disponible"}
-    </p>
-  </section>
-</section>
+        <section style="background-color: #f3f4f6; padding: 12px; margin: 10px 0;">
+            <h3 style="color: black;">Conclusion</h3>
+            <p style="color: black;">
+            ${critica.conclusion || "No disponible"}
+            </p>
+        </section>
+    </section>
 
   <div class="volver">
     <button onclick="history.back()">Volver</button>
@@ -618,7 +651,11 @@ function mostrarCalificacionesPorCategoria(nombrePelicula) {
                             ${pelicula.calificaciones.map(c => `
                                 <tr>
                                     <td>${c.categoria}</td>
-                                    <td><span class="rating-badge">${c.calificacion}</span></td>
+                                    <td>
+                                       <span class="rating-badge ${c.calificacion >= 60 ? 'passed' : 'failed'}">
+                                          ${c.calificacion}
+                                       </span>
+                                    </td>
                                 </tr>
                             `).join('')}
                         </tbody>
