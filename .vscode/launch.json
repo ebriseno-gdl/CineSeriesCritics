@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Abrir Cineseriescritics en Chrome",
-            "file": "${workspaceFolder}/Cineseriescritics.html",
-            "webRoot": "${workspaceFolder}"
+        "type": "pwa-chrome",
+        "request": "launch",
+        "name": "Cineseriescritics en Chrome",
+        "url": "http://127.0.0.1:5500/Cineseriescritics.html",
+        "webRoot": "${workspaceFolder}"
         }
     ]
 }
