@@ -14,17 +14,15 @@ Aplicación web para visualizar criticas de películas y series. El proyecto est
 
 ## Cómo ejecutar el proyecto
 
-No es necesario instalar Node.js ni ejecutar un servidor.
+Para abrir la página en Chrome, instala la extensión **Live Server** (de Ritwick Dey) en VS Code. Abre `Cineseriescritics.html`, haz clic derecho sobre el archivo y selecciona **Open with Live Server**. La página se abrirá en el navegador predeterminado; si no es Chrome, copia la dirección que aparece y ábrela en Chrome.
 
-1. Abre `Cineseriescritics.html` directamente en un navegador.
-2. Selecciona una tarjeta para ver el detalle de la película.
-3. Desde el detalle puedes abrir el trailer o regresar al catálogo.
+No abras el HTML directamente desde el explorador de archivos: Live Server es necesario para cargar el catálogo de películas.
 
-También puedes abrir la carpeta en VS Code y usar una extensión de servidor local, como Live Server, si prefieres recargar los cambios automáticamente.
+Una vez abierta la pagina principal te mostra el catálogo de peliculas, cada pelicula es en una tarjeta, selecciona una tarjeta para ver el detalle de la película y desde el detalle puedes abrir el trailer o regresar al catálogo.
 
 ## Estructura principal
 
-```text
+
 Cineseriescritics.html   # Estructura de la página
 Cineseriescritics.css    # Estilos y diseño responsive de las tarjetas y detalles
 Cineseriescritics.js     # Catálogo, renderizado, detalles y calificaciones
@@ -35,28 +33,28 @@ Images/                  # Portadas utilizadas por el catálogo
 
 ## Añadir una película
 
-Edita el arreglo `peliculas` en `Cineseriescritics.js` y agrega un objeto con, al menos, estos datos:
+Abre `datos/peliculas.json` y agrega un objeto al catálogo. Usa un `id` que no esté repetido y separa cada objeto con una coma. Como es un archivo JSON, no agregues comentarios ni una coma después del último objeto.
 
-```javascript
+```json
 {
-  id: 14,
-  name: "TITULO DE LA PELICULA",
-  anioEstreno: 2026,
-  image: "images/NombreDeLaImagen.jpg",
-  paisestreno: "Pais",
-  duracion: "2h 00min",
-  genero: "Drama",
-  direccion: "Nombre del director",
-  guion: "Nombre del guionista",
-  produccion: "Nombre del productor",
-  trailerVideo: "ID_DEL_VIDEO_DE_YOUTUBE",
-  calificaciones: [
-    {categoria: "Guion", calificacion: 80}
+  "id": 17,
+  "name": "TÍTULO DE LA PELÍCULA",
+  "anioEstreno": 2026,
+  "image": "Images/NombreDeLaImagen.jpg",
+  "paisestreno": "País",
+  "duracion": "2h 00min",
+  "genero": "Drama",
+  "direccion": "Nombre del director",
+  "guion": "Nombre del guionista",
+  "produccion": "Nombre del productor",
+  "trailerVideo": "ID_DEL_VIDEO_DE_YOUTUBE",
+  "calificaciones": [
+    { "categoria": "Guion", "calificacion": 80 }
   ]
 }
 ```
 
-Guarda la portada dentro de `Images/` y comprueba que el nombre y la ruta coincidan con el valor de `image`. Después, recarga `Cineseriescritics.html` para ver los cambios.
+Guarda la portada en Images/ y verifica que la ruta de image coincida con su nombre. Guarda el JSON y recarga la página para ver la película en el catálogo
 
 ## Tecnologías
 
